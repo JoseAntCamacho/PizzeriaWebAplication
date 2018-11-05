@@ -18,7 +18,7 @@ namespace Domain
         public string Name { get; set; }
         [Required]
         public byte[] Picture { get; set; }
-
+        //Prueba de conexion
 
         public ICollection<Ingredient> Ingredients { get; set; }
         public ICollection<Commentary> Commentaries { get; set; }
