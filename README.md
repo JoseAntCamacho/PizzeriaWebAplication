@@ -4,9 +4,6 @@ Prueba Gonzalo
 
 Hello Pedro Hurtado
 
-<<<<<<< HEAD
-=======
-
 Hello Gonzalo
 
->>>>>>> PruebaGonzalo
+Hello Pepe
