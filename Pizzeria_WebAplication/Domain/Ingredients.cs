@@ -5,9 +5,9 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BackendPizzeria.Domain
+namespace Domain
 {
-    public class Ingredient
+    public class Ingredient : EntityBase
     {
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

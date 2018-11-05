@@ -9,7 +9,7 @@ using System.Configuration;
 
 namespace Domain
 {
-    public class Pizza
+    public class Pizza : EntityBase
     {
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

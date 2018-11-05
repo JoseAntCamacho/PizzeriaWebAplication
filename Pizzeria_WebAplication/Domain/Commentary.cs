@@ -6,9 +6,9 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using BackendPizzeria.Dtos;
 
-namespace BackendPizzeria.Domain
+namespace Domain
 {
-    public class Commentary
+    public class Commentary : EntityBase
     {
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
