@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -43,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commentary.cs" />
+    <Compile Include="DtoPizza.cs" />
     <Compile Include="EntityBase.cs" />
     <Compile Include="Ingredients.cs" />
     <Compile Include="Pizza.cs" />

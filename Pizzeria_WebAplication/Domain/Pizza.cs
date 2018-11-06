@@ -18,23 +18,25 @@ namespace Domain
         public string Name { get; set; }
         [Required]
         public byte[] Picture { get; set; }
-        //Prueba de conexion
-
+        
         public ICollection<Ingredient> Ingredients { get; set; }
         public ICollection<Commentary> Commentaries { get; set; }
 
-        public Pizza(string name, byte[] picture, ICollection<Ingredient> ingredients)
-        {
-            Name = name;
-            Picture = picture;
-            Ingredients = ingredients;
-        }
-
-        /*public decimal Price()
+        public decimal Price()
         {
             decimal profit = Decimal.Parse(ConfigurationManager.AppSettings["Profit"]);
             return this.Ingredients.Sum(c => c.Price) + profit;
-        }*/       
+        }
 
+        public static Pizza Create (DtoPizza dato)
+        {
+            var pizza = new Pizza()
+            {
+                Name = dato.Name,
+                Picture = dato.Picture,
+                Ingredients = dato.Ingredients
+            };
+            return pizza;
+        }
     }
 }

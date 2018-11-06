@@ -9,17 +9,24 @@ using System.Configuration;
 
 namespace Domain
 {
-    public class EntityBase
+    public class EntityBase : IValidatableObject
     {
-      
-      public virtual bool IsValid()
-      {
-          var context= new ValidationContext(this, null, null);
-          var result= new List<ValidationResult>();
-          return Validator.TryValidateObject(this, context, result);
+        
+        public virtual bool IsValid()
+        {
+            var context= new ValidationContext(this, null, null);
+            var result= new List<ValidationResult>();
+            return Validator.TryValidateObject(this, context, result);
+        }
 
-      }   
-
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            var results = new List<ValidationResult>();
+            Validator.TryValidateProperty(this,
+                new ValidationContext(this, null, null),
+                results);
+            return results;
+        }
 
     }
 }
