@@ -50,10 +50,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PizzaContext.cs" />
     <Compile Include="IPizzaContext.cs" />
     <Compile Include="IUOW.cs" />
+    <Compile Include="PizzaContextMigrations\201811061946124_InitialMigrationPizzaContext.cs" />
+    <Compile Include="PizzaContextMigrations\201811061946124_InitialMigrationPizzaContext.Designer.cs">
+      <DependentUpon>201811061946124_InitialMigrationPizzaContext.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PizzaContextMigrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -68,6 +72,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PizzaContextMigrations\201811061946124_InitialMigrationPizzaContext.resx">
+      <DependentUpon>201811061946124_InitialMigrationPizzaContext.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

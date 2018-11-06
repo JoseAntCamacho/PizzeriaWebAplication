@@ -34,9 +34,6 @@ namespace Infrastructure
                 .HasRequired<Pizza>(s => s.Pizza)
                 .WithMany(g => g.Commentaries)
                 .HasForeignKey<int>(s => s.PizzaId);
-
-          
         }
-
     }
 }
