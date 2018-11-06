@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using BackendPizzeria.Dtos;
 
 namespace Domain
 {
@@ -25,18 +24,5 @@ namespace Domain
         public int PizzaId { get; set; }
         public Pizza Pizza { get; set; }
 
-        public Commentary()
-        {
-
-        }
-
-        public Commentary(string text, byte punctuation, DateTime dateTime, string user, int pizzaId)
-        {
-            Text = text;
-            Punctuation = punctuation;
-            DateTime = dateTime;
-            User = user;
-            PizzaId = pizzaId;
-        }
     }
 }
