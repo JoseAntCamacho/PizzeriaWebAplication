@@ -22,5 +22,19 @@ namespace Infrastructure
         {
             return this.SaveChanges();
         }
+
+        public PizzaContext() : base("name=DefaultConnection")
+        {
+
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Commentary>()
+                .HasRequired<Pizza>(s => s.Pizza)
+                .WithMany(g => g.Commentaries)
+                .HasForeignKey<int>(s => s.PizzaId);
+        }
+
     }
 }
