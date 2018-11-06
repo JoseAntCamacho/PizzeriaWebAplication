@@ -14,9 +14,9 @@ namespace Infrastructure
         public DbSet<Ingredient> Ingredient { get; set; }
         public DbSet<Commentary> Commentary { get; set; }
 
-        IDbSet<Pizza> IPizzaContext.Pizza => this.Pizza;
-        IDbSet<Ingredient> IPizzaContext.Ingredient => this.Ingredient;
-        IDbSet<Commentary> IPizzaContext.Commentary => this.Commentary;
+        IDbSet<Pizza> IPizzaContext.Pizzas => this.Pizza;
+        IDbSet<Ingredient> IPizzaContext.Ingredients => this.Ingredient;
+        IDbSet<Commentary> IPizzaContext.Commentaries => this.Commentary;
 
         int IUOW.SaveChanges()
         {
@@ -34,6 +34,8 @@ namespace Infrastructure
                 .HasRequired<Pizza>(s => s.Pizza)
                 .WithMany(g => g.Commentaries)
                 .HasForeignKey<int>(s => s.PizzaId);
+
+          
         }
 
     }

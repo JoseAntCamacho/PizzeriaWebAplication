@@ -10,9 +10,9 @@ namespace Infrastructure
 {
     public interface IPizzaContext : IUOW
     {
-        IDbSet<Pizza> Pizza{get;}
-        IDbSet<Ingredient> Ingredient{ get; }
-        IDbSet<Commentary> Commentary{ get; }
+        IDbSet<Pizza> Pizzas{get;}
+        IDbSet<Ingredient> Ingredients{ get; }
+        IDbSet<Commentary> Commentaries{ get; }
         //Context
 
 
