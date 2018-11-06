@@ -10,7 +10,7 @@ namespace Application
 {
     public class PizzaService : IPizzaService
     {
-        private IPizzaContext pizzaContext;
+        private IPizzaContext _pizzaContext;
 
         public Pizza Add(DtoPizza data)
         {
@@ -19,8 +19,8 @@ namespace Application
             {
                 throw new Exception("No se ha podido añadir la pizza porque no es válida la entidad");
             }            
-            var response = pizzaContext.Pizzas.Add(pizza);
-            pizzaContext.SaveChanges();
+            var response = _pizzaContext.Pizzas.Add(pizza);
+            _pizzaContext.SaveChanges();
             return response;  
         }
 
