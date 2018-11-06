@@ -14,5 +14,10 @@ namespace Pizzeria_WebAplication
         {
             ConfigureAuth(app);
         }
+
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddMvc();
+        }
     }
 }
