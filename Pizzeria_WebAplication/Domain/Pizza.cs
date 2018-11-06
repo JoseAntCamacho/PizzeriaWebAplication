@@ -9,7 +9,7 @@ using System.Configuration;
 
 namespace Domain
 {
-    public class Pizza : EntityBase
+    public class Pizza : EntityBase, IValidatableObject
     {
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -18,8 +18,7 @@ namespace Domain
         public string Name { get; set; }
         [Required]
         public byte[] Picture { get; set; }
-        //Prueba de conexion
-
+        
         public ICollection<Ingredient> Ingredients { get; set; }
         public ICollection<Commentary> Commentaries { get; set; }
 
@@ -29,12 +28,12 @@ namespace Domain
             Picture = picture;
             Ingredients = ingredients;
         }
-
-        /*public decimal Price()
+        
+        public decimal Price()
         {
             decimal profit = Decimal.Parse(ConfigurationManager.AppSettings["Profit"]);
             return this.Ingredients.Sum(c => c.Price) + profit;
-        }*/       
+        }
 
     }
 }
