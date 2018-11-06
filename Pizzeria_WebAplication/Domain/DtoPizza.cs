@@ -7,13 +7,10 @@ using System.Threading.Tasks;
 
 namespace Domain
 {
-    class DtoPizza
+    public class DtoPizza
     {
-        [Key]
-        public string Name { get; set; }
-        [Required]
+        public string Name { get; set; }   
         public byte[] Picture { get; set; }
-        [Required]
         public ICollection<Ingredient> Ingredients { get; set; }
     }
 }
