@@ -29,9 +29,9 @@ namespace Infrastructure.PizzaContextMigrations
                 new Ingredient { Name = "Oregano", Price = 0.2M},
                 new Ingredient { Name = "Masa de pizza", Price = 1.5M}
             };
-            if (context.Ingredients == null)
+            if (context.Ingredient == null)
             {
-                context.Ingredients.AddOrUpdate(listaInicial);
+                context.Ingredient.AddOrUpdate(listaInicial);
             }
         }
     }

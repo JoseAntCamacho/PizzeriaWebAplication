@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Owin;
-using Microsoft.Extensions.DependencyInjection;
 using Owin;
 using Pizzeria_WebAplication.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -16,11 +15,6 @@ namespace Pizzeria_WebAplication
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-        }
-
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMvc();
         }
     }
 }
