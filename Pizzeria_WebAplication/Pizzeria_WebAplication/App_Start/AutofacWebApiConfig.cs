@@ -28,6 +28,7 @@ namespace Pizzeria_WebAplication.App_Start
         {
             //Register your Web API controllers.  
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
+            
 
             builder.RegisterType<PizzaContext>()
                    .As<DbContext>()
