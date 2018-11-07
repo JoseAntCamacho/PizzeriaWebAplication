@@ -5,16 +5,17 @@ namespace Pizzeria_WebAplication.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using Pizzeria_WebAplication.Models;
     
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Pizzeria_WebAplication.Models.ApplicationDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(Pizzeria_WebAplication.Models.ApplicationDbContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
