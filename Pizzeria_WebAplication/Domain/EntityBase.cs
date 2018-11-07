@@ -19,13 +19,17 @@ namespace Domain
             return Validator.TryValidateObject(this, context, result);
         }
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            var results = new List<ValidationResult>();
-            Validator.TryValidateProperty(this,
-                new ValidationContext(this, null, null),
-                results);
-            return results;
+            //var context = new ValidationContext(this, null, null);
+            var result = new List<ValidationResult>()
+            {
+                new ValidationResult("Aquí no hay nada")
+            };
+            //Validator.TryValidateObject(this, validationContext, result);
+            return result;
+
+            //Esto creo que se autollama a sí mismo.
         }
 
     }

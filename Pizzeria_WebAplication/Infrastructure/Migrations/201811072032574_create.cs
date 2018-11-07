@@ -1,9 +1,9 @@
-namespace Infrastructure.PizzaContextMigrations
+namespace Infrastructure.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialMigrationPizzaContext : DbMigration
+    public partial class create : DbMigration
     {
         public override void Up()
         {
