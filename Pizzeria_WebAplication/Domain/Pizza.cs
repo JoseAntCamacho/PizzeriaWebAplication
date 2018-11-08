@@ -28,13 +28,13 @@ namespace Domain
             return this.Ingredients.Sum(c => c.Price) + profit;
         }
 
-        public static Pizza Create (DtoPizza dato,List<Ingredient> ingredients)
+        public static Pizza Create (DtoPizza dato)
         {
             var pizza = new Pizza()
             {
                 Name = dato.Name,
                 Picture = dato.Picture,
-                Ingredients = ingredients                
+                Ingredients = dato.Ingredients
             };
             return pizza;
         }
