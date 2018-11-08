@@ -23,7 +23,7 @@ namespace Infrastructure
             return this.SaveChanges();
         }
 
-        public PizzaContext() : base("name=Console")
+        public PizzaContext() : base("name=PizzeriaApp")
         {
 
         }
@@ -34,6 +34,7 @@ namespace Infrastructure
                 .HasRequired<Pizza>(s => s.Pizza)
                 .WithMany(g => g.Commentaries)
                 .HasForeignKey<int>(s => s.PizzaId);
+
         }
     }
 }

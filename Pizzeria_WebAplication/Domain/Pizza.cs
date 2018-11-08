@@ -11,14 +11,12 @@ namespace Domain
 {
     public class Pizza : EntityBase
     {
-        [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+
         [Required]
         public string Name { get; set; }
         [Required]
         public byte[] Picture { get; set; }
-        
+
         public ICollection<Ingredient> Ingredients { get; set; }
         public ICollection<Commentary> Commentaries { get; set; }
 

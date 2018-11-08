@@ -9,9 +9,7 @@ namespace Domain
 {
     public class Commentary : EntityBase
     {
-        [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+
         [Required]
         public string Text { get; set; }
         [Required]

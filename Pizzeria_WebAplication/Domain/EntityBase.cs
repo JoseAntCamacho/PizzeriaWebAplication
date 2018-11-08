@@ -9,27 +9,17 @@ using System.Configuration;
 
 namespace Domain
 {
-    public class EntityBase : IValidatableObject
+    public class EntityBase 
     {
-        
+        [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
         public virtual bool IsValid()
         {
             var context= new ValidationContext(this, null, null);
             var result= new List<ValidationResult>();
             return Validator.TryValidateObject(this, context, result);
-        }
-
-        public virtual IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            //var context = new ValidationContext(this, null, null);
-            var result = new List<ValidationResult>()
-            {
-                new ValidationResult("Aquí no hay nada")
-            };
-            //Validator.TryValidateObject(this, validationContext, result);
-            return result;
-
-            //Esto creo que se autollama a sí mismo.
         }
 
     }

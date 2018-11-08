@@ -9,12 +9,12 @@ namespace Domain
 {
     public class Ingredient : EntityBase
     {
-        [Required]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+
         [Required]
         public string Name { get; set; }
         [Required]
         public decimal Price { get; set; } 
+         
+        public ICollection<Pizza> Pizzas { get; set; }
     }
 }

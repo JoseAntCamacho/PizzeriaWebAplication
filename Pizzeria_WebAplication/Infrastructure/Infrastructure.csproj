@@ -54,6 +54,10 @@
     <Compile Include="Migrations\201811072032574_create.Designer.cs">
       <DependentUpon>201811072032574_create.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811080946306_DataBaseIngredients.cs" />
+    <Compile Include="Migrations\201811080946306_DataBaseIngredients.Designer.cs">
+      <DependentUpon>201811080946306_DataBaseIngredients.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PizzaContext.cs" />
     <Compile Include="IPizzaContext.cs" />
@@ -76,6 +80,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201811072032574_create.resx">
       <DependentUpon>201811072032574_create.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811080946306_DataBaseIngredients.resx">
+      <DependentUpon>201811080946306_DataBaseIngredients.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
