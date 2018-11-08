@@ -11,13 +11,12 @@ using System.Web;
 using Newtonsoft.Json;
 using System.Web.Http;
 using System.Text;
+using System.IO;
 
 namespace Pizzeria_WebAplication.Controllers
 {
     public class PizzaController : ApiController
     {
-        
-
         // llevarme esto al dominio, la clase FormItem. Hacer validaciones del mediaType.
         // Hacer una relación uno a uno con la pizza y así guardamos el mediaType.
         // Hacer una lista de los mediaType que se soportan y hacer una validación en el método post.
@@ -40,8 +39,20 @@ namespace Pizzeria_WebAplication.Controllers
         [Route("{id:int}/image")]
         public HttpResponseMessage GetPizzaImage(int id)
         {
-            var picture = _pizzaService.GetImage(id);
-            return Request.CreateResponse(HttpStatusCode.Created, picture);
+            var picture = _pizzaService.GetImageByPizzaId(id);
+            var mediaType = _pizzaService.GetMediaTypeImage(id);
+
+            var dataStream = new MemoryStream(picture);
+            
+            HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.OK);
+            response.Content = new StreamContent(dataStream);
+
+            response.Content.Headers.ContentDisposition =
+                new System.Net.Http.Headers.ContentDispositionHeaderValue("inline");
+            response.Content.Headers.ContentType = 
+                new System.Net.Http.Headers.MediaTypeHeaderValue(mediaType);
+
+            return response;
         }
 
         //POST : api/pizza/add
@@ -76,7 +87,8 @@ namespace Pizzeria_WebAplication.Controllers
                     formItems.Add(formItem);
                 }
 
-                var dto = new DtoPizza();
+                var dto = new DtoPizza(); 
+                  
                 foreach (var formItem in formItems)
                 {
                     if (!formItem.isAFileUpload)
@@ -88,6 +100,7 @@ namespace Pizzeria_WebAplication.Controllers
                                 break;
                             case "Picture":
                                 dto.Picture = formItem.data;
+                                dto.FormItems = formItem;
                                 break;
                             case "Ingredients":
                                 var format = Encoding.UTF8.GetString(formItem.data);
@@ -101,7 +114,11 @@ namespace Pizzeria_WebAplication.Controllers
                 var obj = new { Id = pizza.Id, Name = pizza.Name,
                                 Image = String.Format("/api/pizza/{0}/image",pizza.Id)};
 
-                return Request.CreateResponse(HttpStatusCode.Created,obj);
+                var response = Request.CreateResponse(HttpStatusCode.Created, obj);
+                response.Headers.Location =
+                    new Uri("file:///C:/Users/Jose%20Antonio/Desktop/ProyectosNET/Front_Pizzeria/index.html");
+
+                return response;
             }
             catch (System.Exception e)
             {

@@ -10,6 +10,7 @@ namespace Application
     public interface IPizzaService
     {
         Pizza Add(DtoPizza dato);
-        byte[] GetImage(int id);
+        byte[] GetImageByPizzaId(int id);
+        string GetMediaTypeImage(int id);
     }
 }

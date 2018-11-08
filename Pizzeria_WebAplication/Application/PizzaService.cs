@@ -40,14 +40,24 @@ namespace Application
             return _pizzaContext.Ingredients.Where(c=> ingredients.Contains(c.Id));
         }
 
-        public byte[] GetImage (int id)
+        public byte[] GetImageByPizzaId (int id)
         {
             if(null == _pizzaContext.Pizzas.Find(id))
             {
                 throw new ArgumentNullException("La pizza no se ha encontrado");
             }
-            return _pizzaContext.Pizzas.Find(id).Picture;
+            var result = _pizzaContext.Pizzas.Find(id).Picture;
+            return result;
         }
 
+        public string GetMediaTypeImage (int id)
+        {
+            if (null == _pizzaContext.Pizzas.Find(id))
+            {
+                throw new ArgumentNullException("La pizza no se ha encontrado");
+            }
+            var result = _pizzaContext.Pizzas.Find(id).FormItem.mediaType;
+            return result;
+        }
     }
 }

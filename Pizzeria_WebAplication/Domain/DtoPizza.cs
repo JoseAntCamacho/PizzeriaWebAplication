@@ -17,5 +17,6 @@ namespace Domain
         public string Name { get; set; }   
         public byte[] Picture { get; set; }
         public ICollection<int> Ingredients { get; set; }
+        public FormItem FormItems { get; set; }
     }
 }

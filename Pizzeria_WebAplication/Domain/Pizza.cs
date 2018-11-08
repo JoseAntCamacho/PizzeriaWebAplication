@@ -41,6 +41,7 @@ namespace Domain
             {
                 Name = dato.Name,
                 Picture = dato.Picture,
+                FormItem = dato.FormItems,
                 Ingredients = ingredients.ToList()               
             };
             return pizza;
