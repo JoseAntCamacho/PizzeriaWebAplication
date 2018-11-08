@@ -9,12 +9,16 @@ namespace Domain
 {
     public class Ingredient : EntityBase
     {
+        public Ingredient()
+        {
+            this.Pizzas = new HashSet<Pizza>();
+        }
 
         [Required]
         public string Name { get; set; }
         [Required]
         public decimal Price { get; set; } 
          
-        public ICollection<Pizza> Pizzas { get; set; }
+        public virtual ICollection<Pizza> Pizzas { get; set; }
     }
 }

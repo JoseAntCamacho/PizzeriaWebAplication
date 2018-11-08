@@ -12,13 +12,21 @@ namespace Domain
     public class Pizza : EntityBase
     {
 
+        public Pizza()
+        {
+            this.Ingredients = new HashSet<Ingredient>();
+            this.Commentaries = new HashSet<Commentary>();
+        }
+
         [Required]
         public string Name { get; set; }
         [Required]
         public byte[] Picture { get; set; }
 
-        public ICollection<Ingredient> Ingredients { get; set; }
-        public ICollection<Commentary> Commentaries { get; set; }
+        public virtual ICollection<Ingredient> Ingredients { get; set; }
+        public virtual ICollection<Commentary> Commentaries { get; set; }
+
+
 
         public decimal Price()
         {
@@ -26,15 +34,26 @@ namespace Domain
             return this.Ingredients.Sum(c => c.Price) + profit;
         }
 
-        public static Pizza Create (DtoPizza dato,List<Ingredient> ingredients)
+        public static Pizza Create (DtoPizza dato, IEnumerable<Ingredient> ingredients)
         {
             var pizza = new Pizza()
             {
                 Name = dato.Name,
                 Picture = dato.Picture,
-                Ingredients = ingredients                
+                Ingredients = ingredients.ToList()               
             };
             return pizza;
+        }
+
+        public override bool IsValid()
+        {
+            var valid = base.IsValid();
+            if (this.Ingredients.Count==0)
+            {
+                this.Errors.Add(new ValidationResult("No hay ingredientes en la pizza"));
+                valid = false;
+            }
+            return valid;
         }
     }
 }

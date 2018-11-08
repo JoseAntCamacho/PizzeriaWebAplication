@@ -11,15 +11,25 @@ namespace Domain
 {
     public class EntityBase 
     {
+        public EntityBase()
+        {
+            Errors = new List<ValidationResult>();
+        }
+
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
+        [NotMapped]
+        public List<ValidationResult> Errors { get; private set; }
 
         public virtual bool IsValid()
         {
             var context= new ValidationContext(this, null, null);
             var result= new List<ValidationResult>();
-            return Validator.TryValidateObject(this, context, result);
+            var valid = Validator.TryValidateObject(this, context, result);
+            Errors = result;
+            return valid;
         }
 
     }

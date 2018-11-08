@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core;
 
 namespace Application
 {
     public class PizzaService : IPizzaService
     {
         private readonly IPizzaContext _pizzaContext;
+
         public PizzaService(IPizzaContext pizzaContext)
         {
             _pizzaContext = pizzaContext;
@@ -18,14 +20,13 @@ namespace Application
 
         public Pizza Add(DtoPizza data)
         {
-            //  TODO:COMPROBAR QUE LOS INGREDIENTES EXISTEN Y QUE TIENE INGREDIENTES
+            var ingredientes = GetIngredients(data.Ingredients);
 
-            var ingredientes = ValidaIngredientes(data);
-           
             var pizza = Pizza.Create(data,ingredientes);
+
             if (!pizza.IsValid())
             {
-                throw new Exception("No se ha podido añadir la pizza porque no es válida la entidad");
+                throw new CustomException(pizza.Errors);
             }            
             var response = _pizzaContext.Pizzas.Add(pizza);
             _pizzaContext.SaveChanges();
@@ -33,23 +34,10 @@ namespace Application
             return response;  
         }
 
-        private List<Ingredient> ValidaIngredientes(DtoPizza data)
+        private IEnumerable<Ingredient> GetIngredients(IEnumerable<int> ingredients)
         {
-            if (data.Ingredients.Count() == 0)
-            {
-                throw new Exception("No se ha encontrado ningún ingrediente");
-            }
-            var ingredientes = new List<Ingredient>();
-            foreach (var item in data.Ingredients)
-            {
-                var result = _pizzaContext.Ingredients.Find(item);
-                if (result == null)
-                {
-                    throw new Exception("Not Found Item");
-                }
-                ingredientes.Add(result);
-            }
-            return ingredientes;
+            //método que devuelve todos los ingredientes que están en la lista de int del Dto.            
+            return _pizzaContext.Ingredients.Where(c=> ingredients.Contains(c.Id));
         }
 
     }
