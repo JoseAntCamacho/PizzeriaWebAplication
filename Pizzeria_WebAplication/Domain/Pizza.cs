@@ -25,6 +25,7 @@ namespace Domain
 
         public virtual ICollection<Ingredient> Ingredients { get; set; }
         public virtual ICollection<Commentary> Commentaries { get; set; }
+        public virtual FormItem FormItem { get; set; }
 
 
 

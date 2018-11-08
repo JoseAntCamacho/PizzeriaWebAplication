@@ -16,16 +16,7 @@ namespace Pizzeria_WebAplication.Controllers
 {
     public class PizzaController : ApiController
     {
-        private class FormItem
-        {
-            public FormItem() { }
-            public string name { get; set; }
-            public byte[] data { get; set; }
-            public string fileName { get; set; }
-            public string mediaType { get; set; }
-            public string value { get { return Encoding.Default.GetString(data); } }
-            public bool isAFileUpload { get { return !String.IsNullOrEmpty(fileName); } }
-        }
+        
 
         // llevarme esto al dominio, la clase FormItem. Hacer validaciones del mediaType.
         // Hacer una relación uno a uno con la pizza y así guardamos el mediaType.

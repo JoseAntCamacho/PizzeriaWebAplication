@@ -52,6 +52,7 @@
     <Compile Include="Commentary.cs" />
     <Compile Include="DtoPizza.cs" />
     <Compile Include="EntityBase.cs" />
+    <Compile Include="FormItem.cs" />
     <Compile Include="Ingredients.cs" />
     <Compile Include="Pizza.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
