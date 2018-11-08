@@ -10,76 +10,107 @@ using System.Threading.Tasks;
 using System.Web;
 using Newtonsoft.Json;
 using System.Web.Http;
+using System.Text;
 
 namespace Pizzeria_WebAplication.Controllers
 {
     public class PizzaController : ApiController
     {
+        private class FormItem
+        {
+            public FormItem() { }
+            public string name { get; set; }
+            public byte[] data { get; set; }
+            public string fileName { get; set; }
+            public string mediaType { get; set; }
+            public string value { get { return Encoding.Default.GetString(data); } }
+            public bool isAFileUpload { get { return !String.IsNullOrEmpty(fileName); } }
+        }
+
+        // llevarme esto al dominio, la clase FormItem. Hacer validaciones del mediaType.
+        // Hacer una relación uno a uno con la pizza y así guardamos el mediaType.
+        // Hacer una lista de los mediaType que se soportan y hacer una validación en el método post.
+
+        // de los byte a un memorystream.
+        // del memorystream web api download file. Return binary
+        // en el header hay que poner el media type de la imagen.
+
+        // probar y testear con el index.html y/o con el findler.
+
         private readonly IPizzaService _pizzaService;
 
         public PizzaController (IPizzaService pizzaService)
         {
-            if (pizzaService == null)
-            {
-                throw new ArgumentNullException("pizzaService");
-            }
-            _pizzaService = pizzaService;
+            _pizzaService = pizzaService ?? throw new ArgumentNullException("Null Service pizzaService");
         }
 
-        // GET: api/Aplication
-        public IEnumerable<string> Get()
+        // GET: api/pizza/id/image
+        [HttpGet]
+        [Route("{id:int}/image")]
+        public HttpResponseMessage GetPizzaImage(int id)
         {
-            return new string[] { "value1", "value2" };
+            var picture = _pizzaService.GetImage(id);
+            return Request.CreateResponse(HttpStatusCode.Created, picture);
         }
 
-        //POST : api/pizza/FormData
+        //POST : api/pizza/add
         [HttpPost]
-        [ActionName("FormData")]
-        public async Task<HttpResponseMessage> PostFormData()
+        [ActionName("add")]
+        public async Task<HttpResponseMessage> PostAdd()
         {
-            // Check if the request contains multipart/form-data.
             if (!Request.Content.IsMimeMultipartContent())
             {
                 throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+                //TODO: Redirigir a la vista principal.
             }
 
-            string root = HttpContext.Current.Server.MapPath("~/App_Data");
-            var provider = new MultipartFormDataStreamProvider(root);
+            var provider = new MultipartMemoryStreamProvider();
 
             try
             {
                 // Read the form data.
                 await Request.Content.ReadAsMultipartAsync(provider);
 
-                // Show all the key-value pairs.
+                var formItems = new List<FormItem>();
+
+                // Scan the Multiple Parts 
+                foreach (HttpContent contentPart in provider.Contents)
+                {
+                    var formItem = new FormItem();
+                    var contentDisposition = contentPart.Headers.ContentDisposition;
+                    formItem.name = contentDisposition.Name.Trim('"');
+                    formItem.data = await contentPart.ReadAsByteArrayAsync();
+                    formItem.fileName = String.IsNullOrEmpty(contentDisposition.FileName) ? "" : contentDisposition.FileName.Trim('"');
+                    formItem.mediaType = contentPart.Headers.ContentType == null ? "" : String.IsNullOrEmpty(contentPart.Headers.ContentType.MediaType) ? "" : contentPart.Headers.ContentType.MediaType;
+                    formItems.Add(formItem);
+                }
 
                 var dto = new DtoPizza();
-                foreach (var key in provider.FormData.AllKeys)
+                foreach (var formItem in formItems)
                 {
-                    foreach (var val in provider.FormData.GetValues(key))
+                    if (!formItem.isAFileUpload)
                     {
-                        if (key == "Name"){
-                            dto.Name = val;
-                        }
-                        if (key == "Ingredientes")
-                        {                            
-                            dto.Ingredients= JsonConvert.DeserializeObject<List<int>>(val);
+                        switch (formItem.name)
+                        {
+                            case "Name":
+                                dto.Name = Encoding.UTF8.GetString(formItem.data);
+                                break;
+                            case "Picture":
+                                dto.Picture = formItem.data;
+                                break;
+                            case "Ingredients":
+                                var format = Encoding.UTF8.GetString(formItem.data);
+                                dto.Ingredients = JsonConvert.DeserializeObject<List<int>>(format);
+                                break;
                         }
                     }
                 }
 
-                // This illustrates how to get the file names.
-                foreach (MultipartFileData file in provider.FileData)
-                {
-                    Trace.WriteLine(file.Headers.ContentDisposition.FileName);
-                    Trace.WriteLine("Server file path: " + file.LocalFileName);
-                }
-
-                
                 var pizza = _pizzaService.Add(dto);
+                var obj = new { Id = pizza.Id, Name = pizza.Name,
+                                Image = String.Format("/api/pizza/{0}/image",pizza.Id)};
 
-                //pizza la conviertes a objeto anonimo y lo devuelves
-                return Request.CreateResponse(HttpStatusCode.Created,pizza);
+                return Request.CreateResponse(HttpStatusCode.Created,obj);
             }
             catch (System.Exception e)
             {

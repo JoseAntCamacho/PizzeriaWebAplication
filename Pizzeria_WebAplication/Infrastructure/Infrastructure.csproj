@@ -65,6 +65,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{a7bb6d82-078d-410e-b36b-2f2fc34060b1}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{5F87C9FD-07E7-4B19-9CDD-753D8B57B7F1}</Project>
       <Name>Domain</Name>

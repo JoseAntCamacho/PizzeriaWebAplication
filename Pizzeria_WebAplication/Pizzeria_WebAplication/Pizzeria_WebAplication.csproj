@@ -350,6 +350,10 @@
       <Project>{852c4934-0ee5-461e-8212-4062912b4175}</Project>
       <Name>Application</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{a7bb6d82-078d-410e-b36b-2f2fc34060b1}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{5f87c9fd-07e7-4b19-9cdd-753d8b57b7f1}</Project>
       <Name>Domain</Name>
