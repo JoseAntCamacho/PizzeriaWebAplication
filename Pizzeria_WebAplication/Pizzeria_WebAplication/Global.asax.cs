@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Pizzeria_WebAplication.App_Start;
 
 namespace Pizzeria_WebAplication
 {
@@ -18,6 +19,9 @@ namespace Pizzeria_WebAplication
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            var config = GlobalConfiguration.Configuration;
+            AutofacWebApiConfig.Initialize(config);
         }
     }
 }

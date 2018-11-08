@@ -10,20 +10,21 @@ namespace Infrastructure
 {
     public class PizzaContext : DbContext, IPizzaContext
     {
-        public DbSet<Pizza> Pizza { get; set; }
-        public DbSet<Ingredient> Ingredient { get; set; }
-        public DbSet<Commentary> Commentary { get; set; }
+        public IDbSet<Pizza> Pizzas { get; set; }
+        public IDbSet<Ingredient> Ingredients { get; set; }
+        public IDbSet<Commentary> Commentaries { get; set; }
+        public IDbSet<FormItem> FormItems { get; set; }
 
-        IDbSet<Pizza> IPizzaContext.Pizzas => this.Pizza;
+        /*IDbSet<Pizza> IPizzaContext.Pizzas => this.Pizza;
         IDbSet<Ingredient> IPizzaContext.Ingredients => this.Ingredient;
-        IDbSet<Commentary> IPizzaContext.Commentaries => this.Commentary;
+        IDbSet<Commentary> IPizzaContext.Commentaries => this.Commentary;*/
 
         int IUOW.SaveChanges()
         {
             return this.SaveChanges();
         }
 
-        public PizzaContext() : base("name=DefaultConnection")
+        public PizzaContext() : base()
         {
 
         }
@@ -35,8 +36,6 @@ namespace Infrastructure
                 .WithMany(g => g.Commentaries)
                 .HasForeignKey<int>(s => s.PizzaId);
 
-          
         }
-
     }
 }

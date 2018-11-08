@@ -1,5 +1,6 @@
 namespace Infrastructure.Migrations
 {
+    using Domain;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -9,15 +10,17 @@ namespace Infrastructure.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
         }
 
         protected override void Seed(Infrastructure.PizzaContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data.
+            context.Ingredients.AddOrUpdate(c => c.Id,
+                new Ingredient() { Name = "Tomate", Price = 0.5M },
+                new Ingredient() { Name = "Queso", Price = 0.20M },
+                new Ingredient() { Name = "Oregano", Price = 0.10M },
+                new Ingredient() { Name = "Masa", Price = 1 }
+           );
         }
     }
 }

@@ -50,6 +50,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201811072032574_create.cs" />
+    <Compile Include="Migrations\201811072032574_create.Designer.cs">
+      <DependentUpon>201811072032574_create.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811080946306_DataBaseIngredients.cs" />
+    <Compile Include="Migrations\201811080946306_DataBaseIngredients.Designer.cs">
+      <DependentUpon>201811080946306_DataBaseIngredients.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811082135124_añadimosFormItem.cs" />
+    <Compile Include="Migrations\201811082135124_añadimosFormItem.Designer.cs">
+      <DependentUpon>201811082135124_añadimosFormItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PizzaContext.cs" />
     <Compile Include="IPizzaContext.cs" />
@@ -57,6 +69,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{a7bb6d82-078d-410e-b36b-2f2fc34060b1}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{5F87C9FD-07E7-4B19-9CDD-753D8B57B7F1}</Project>
       <Name>Domain</Name>
@@ -68,6 +84,17 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201811072032574_create.resx">
+      <DependentUpon>201811072032574_create.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811080946306_DataBaseIngredients.resx">
+      <DependentUpon>201811080946306_DataBaseIngredients.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811082135124_añadimosFormItem.resx">
+      <DependentUpon>201811082135124_añadimosFormItem.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
