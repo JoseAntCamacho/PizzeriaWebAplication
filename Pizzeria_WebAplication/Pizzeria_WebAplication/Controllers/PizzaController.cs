@@ -17,16 +17,6 @@ namespace Pizzeria_WebAplication.Controllers
 {
     public class PizzaController : ApiController
     {
-        // llevarme esto al dominio, la clase FormItem. Hacer validaciones del mediaType.
-        // Hacer una relación uno a uno con la pizza y así guardamos el mediaType.
-        // Hacer una lista de los mediaType que se soportan y hacer una validación en el método post.
-
-        // de los byte a un memorystream.
-        // del memorystream web api download file. Return binary
-        // en el header hay que poner el media type de la imagen.
-
-        // probar y testear con el index.html y/o con el findler.
-
         private readonly IPizzaService _pizzaService;
 
         public PizzaController (IPizzaService pizzaService)
@@ -91,22 +81,20 @@ namespace Pizzeria_WebAplication.Controllers
                   
                 foreach (var formItem in formItems)
                 {
-                    if (!formItem.isAFileUpload)
+                    switch (formItem.name)
                     {
-                        switch (formItem.name)
-                        {
-                            case "Name":
-                                dto.Name = Encoding.UTF8.GetString(formItem.data);
-                                break;
-                            case "Picture":
-                                dto.Picture = formItem.data;
-                                dto.FormItems = formItem;
-                                break;
-                            case "Ingredients":
-                                var format = Encoding.UTF8.GetString(formItem.data);
-                                dto.Ingredients = JsonConvert.DeserializeObject<List<int>>(format);
-                                break;
-                        }
+                        case "Name":
+                            dto.Name = Encoding.UTF8.GetString(formItem.data);
+                            break;
+                        case "Picture":
+                            dto.Picture = formItem.data;
+                            dto.FormItems = formItem;
+                            break;
+                        case "Ingredients":
+                            var format = Encoding.UTF8.GetString(formItem.data);
+                            var numbers = format.Split(',').Select(Int32.Parse).ToList();
+                            dto.Ingredients = new List<int>() { 1, 2 };
+                            break;
                     }
                 }
 
@@ -125,9 +113,5 @@ namespace Pizzeria_WebAplication.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }
         }
-
-        //POST : api/pizza
-
-        
     }
 }

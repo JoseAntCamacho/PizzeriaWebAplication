@@ -13,5 +13,6 @@ namespace Infrastructure
         IDbSet<Pizza> Pizzas{get;}
         IDbSet<Ingredient> Ingredients{ get; }
         IDbSet<Commentary> Commentaries{ get; }
+        IDbSet<FormItem> FormItems { get; }
     }
 }

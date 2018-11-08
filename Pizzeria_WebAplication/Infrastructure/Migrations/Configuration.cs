@@ -20,8 +20,7 @@ namespace Infrastructure.Migrations
                 new Ingredient() { Name = "Queso", Price = 0.20M },
                 new Ingredient() { Name = "Oregano", Price = 0.10M },
                 new Ingredient() { Name = "Masa", Price = 1 }
-                );
-
+           );
         }
     }
 }

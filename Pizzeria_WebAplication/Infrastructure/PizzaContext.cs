@@ -13,6 +13,7 @@ namespace Infrastructure
         public IDbSet<Pizza> Pizzas { get; set; }
         public IDbSet<Ingredient> Ingredients { get; set; }
         public IDbSet<Commentary> Commentaries { get; set; }
+        public IDbSet<FormItem> FormItems { get; set; }
 
         /*IDbSet<Pizza> IPizzaContext.Pizzas => this.Pizza;
         IDbSet<Ingredient> IPizzaContext.Ingredients => this.Ingredient;
@@ -23,7 +24,7 @@ namespace Infrastructure
             return this.SaveChanges();
         }
 
-        public PizzaContext() : base("name=PizzeriaApp")
+        public PizzaContext() : base()
         {
 
         }

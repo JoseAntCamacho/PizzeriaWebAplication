@@ -58,6 +58,10 @@
     <Compile Include="Migrations\201811080946306_DataBaseIngredients.Designer.cs">
       <DependentUpon>201811080946306_DataBaseIngredients.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811082135124_añadimosFormItem.cs" />
+    <Compile Include="Migrations\201811082135124_añadimosFormItem.Designer.cs">
+      <DependentUpon>201811082135124_añadimosFormItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PizzaContext.cs" />
     <Compile Include="IPizzaContext.cs" />
@@ -87,6 +91,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811080946306_DataBaseIngredients.resx">
       <DependentUpon>201811080946306_DataBaseIngredients.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811082135124_añadimosFormItem.resx">
+      <DependentUpon>201811082135124_añadimosFormItem.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

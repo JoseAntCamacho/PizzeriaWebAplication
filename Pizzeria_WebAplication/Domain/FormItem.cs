@@ -9,9 +9,12 @@ using System.Threading.Tasks;
 namespace Domain
 {
 
-    public class FormItem:EntityBase
+    public class FormItem: EntityBase
     {
         public FormItem() { }
+
+        [Key,ForeignKey("Pizza")]
+        public int PizzaFormId { get; set; }
         public string name { get; set; }
         public byte[] data { get; set; }
         public string fileName { get; set; }
@@ -19,13 +22,14 @@ namespace Domain
         public string value { get { return Encoding.Default.GetString(data); } }
         public bool isAFileUpload { get { return !String.IsNullOrEmpty(fileName); } }
 
-        [ForeignKey("PizzaId")]
-        public new int Id { get; set; }
         public virtual Pizza Pizza { get; set; }
+        
+        
 
          private readonly List<string> Extensions = new List<string>
         {
             "image/jpeg",
+            "image/jpg",
             "image/gif",
             "image/png",
             "image/bmp",
