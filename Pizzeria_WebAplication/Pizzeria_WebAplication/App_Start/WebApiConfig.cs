@@ -25,6 +25,10 @@ namespace Pizzeria_WebAplication
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            //Para soportar los formatos multipart formdata
+            config.Formatters.XmlFormatter.SupportedMediaTypes
+                .Add(new System.Net.Http.Headers.MediaTypeHeaderValue("multipart/form-data"));
         }
     }
 }
