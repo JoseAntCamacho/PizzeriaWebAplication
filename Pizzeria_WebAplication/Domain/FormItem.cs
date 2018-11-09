@@ -24,9 +24,7 @@ namespace Domain
 
         public virtual Pizza Pizza { get; set; }
         
-        
-
-         private readonly List<string> Extensions = new List<string>
+        private readonly List<string> Extensions = new List<string>
         {
             "image/jpeg",
             "image/jpg",
