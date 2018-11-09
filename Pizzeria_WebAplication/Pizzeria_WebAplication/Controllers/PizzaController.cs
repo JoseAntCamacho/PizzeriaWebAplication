@@ -12,6 +12,8 @@ using Newtonsoft.Json;
 using System.Web.Http;
 using System.Text;
 using System.IO;
+using Core;
+using System.Web.Http.Description;
 
 namespace Pizzeria_WebAplication.Controllers
 {
@@ -24,10 +26,8 @@ namespace Pizzeria_WebAplication.Controllers
             _pizzaService = pizzaService ?? throw new ArgumentNullException("Null Service pizzaService");
         }
 
-        // GET: api/pizza/id/image
-        [HttpGet]
-        [Route("{id:int}/image")]
-        public HttpResponseMessage GetPizzaImage(int id)
+        // GET: api/pizza/id
+        public HttpResponseMessage GetPizza(int id)
         {
             var picture = _pizzaService.GetImageByPizzaId(id);
             var mediaType = _pizzaService.GetMediaTypeImage(id);
@@ -78,7 +78,6 @@ namespace Pizzeria_WebAplication.Controllers
                 }
 
                 var dto = new DtoPizza(); 
-                  
                 foreach (var formItem in formItems)
                 {
                     switch (formItem.name)
@@ -87,13 +86,16 @@ namespace Pizzeria_WebAplication.Controllers
                             dto.Name = Encoding.UTF8.GetString(formItem.data);
                             break;
                         case "Picture":
+                            if (!formItem.IsValid())
+                            {
+                                throw new CustomException(formItem.Errors);
+                            }
                             dto.Picture = formItem.data;
                             dto.FormItems = formItem;
                             break;
                         case "Ingredients":
                             var format = Encoding.UTF8.GetString(formItem.data);
-                            var numbers = format.Split(',').Select(Int32.Parse).ToList();
-                            dto.Ingredients = new List<int>() { 1, 2 };
+                            dto.Ingredients = format.Split(',').Select(Int32.Parse).ToList();
                             break;
                     }
                 }
@@ -103,9 +105,6 @@ namespace Pizzeria_WebAplication.Controllers
                                 Image = String.Format("/api/pizza/{0}/image",pizza.Id)};
 
                 var response = Request.CreateResponse(HttpStatusCode.Created, obj);
-                response.Headers.Location =
-                    new Uri("file:///C:/Users/Jose%20Antonio/Desktop/ProyectosNET/Front_Pizzeria/index.html");
-
                 return response;
             }
             catch (System.Exception e)
