@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PIZZA PLANET</title>
+</head>
+<body>
+    <form action="http://localhost:59039/api/pizza/add" enctype="multipart/form-data" method="POST">
+        <div>
+            <label>Introduzca el nombre de la pizza: </label>
+            <input type="text" name="Name">
+        </div>
+        <div> 
+            <label>Introduzca el archivo con la imagen de la pizza: </label>
+            <input type="file" name="Picture">
+        </div>
+        <div>
+            <label>Introduzca los ingredientes en forma de lista: </label>
+            <label>Ejemplo: 1,2,3 </label>
+            <OL>
+                <LI> Tomate </LI>
+                <LI> Queso</LI>             
+                <LI> Oregano </LI>
+                <LI> Masa </LI>
+            </OL> 
+            <input type="text" name="Ingredients">
+        </div>
+        <button type="submit">Send</button>
+    </form>
+</body>
+</html>
